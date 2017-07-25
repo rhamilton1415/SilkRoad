@@ -1,5 +1,9 @@
 package geography;
-
+/**
+ * @author      Robert Hamilton
+ * @version     1.0
+ * @since       1.0
+ */
 public abstract class Tile 
 {
 	private final Position tilePosition;
@@ -8,5 +12,4 @@ public abstract class Tile
 		tilePosition = position;
 	}
 	public Position getTilePosition(){return tilePosition;}
-	
 }
