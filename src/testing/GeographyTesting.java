@@ -37,5 +37,20 @@ public class GeographyTesting
 		assertEquals(map[4].getAttackersPenalty(),2);
 		assertEquals(map[5].getAttackersPenalty(),0);
 	}
+	
+	@Test
+	public void PathCreationTest()
+	{
+		ProvinceMap.addPath(f, g);
+		assertNotNull(f.getPath(g));
+		assertNotNull(g.getPath(f));
+		assertEquals(f.getPath(g).getPathCost(), 1.0, 0.1);
+
+		assertTrue(f.getPath(g).isPassable());
+		assertTrue(g.getPath(f).isPassable());
+		f.getPath(g).setPassable(false);
+		assertFalse(f.getPath(g).isPassable());
+		assertFalse(g.getPath(f).isPassable());
+	}
 
 }
