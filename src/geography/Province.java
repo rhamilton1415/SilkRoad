@@ -1,10 +1,14 @@
 package geography;
+
+import java.awt.Color;
+import java.awt.Graphics;
+
 /**
  * @author      Robert Hamilton
  * @version     1.0
  * @since       1.0
  */
-public abstract class Province extends Tile 
+public abstract class Province extends Tile implements Drawable
 {
 
 	private int ruralPopulation;
@@ -63,5 +67,10 @@ public abstract class Province extends Tile
 	{
 		return getRuralPopulation()+getUrbanPopulation()+getEducatedPopulation();
 	}
-
+	public void draw(Graphics g)
+	{
+		   // set the drawing color
+        //g.drawLine(30, 40, 100, 200);
+        g.drawOval(this.getTilePosition().getXCoordinate(), this.getTilePosition().getYCoordinate(), 5, 5);
+	}
 }

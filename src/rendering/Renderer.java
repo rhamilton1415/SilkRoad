@@ -15,7 +15,7 @@ public class Renderer {
 					@Override
 					public void run()
 					{
-						new Frame();
+						//new DisplayFrame();
 					}
 				});
 	}

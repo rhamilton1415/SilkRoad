@@ -2,9 +2,14 @@ package testing;
 
 import static org.junit.Assert.*;
 
+import java.util.ArrayList;
+
+import javax.swing.SwingUtilities;
+
 import org.junit.Test;
 
 import geography.*;
+import rendering.DisplayFrame;
 
 public class GeographyTesting 
 {
@@ -15,6 +20,7 @@ public class GeographyTesting
 	Province m = new Mountains(new Position(1,5));
 	Province c = new Coastal(new Position(1,6));
 	
+	//functionality tests
 	@Test
 	public void attackersPenaltyTest()
 	{
@@ -41,7 +47,7 @@ public class GeographyTesting
 	@Test
 	public void PathCreationTest()
 	{
-		ProvinceMap.addPath(f, g);
+		Path.createPath(f, g);
 		assertNotNull(f.getPath(g));
 		assertNotNull(g.getPath(f));
 		assertEquals(f.getPath(g).getPathCost(), 1.0, 0.1);
@@ -51,6 +57,41 @@ public class GeographyTesting
 		f.getPath(g).setPassable(false);
 		assertFalse(f.getPath(g).isPassable());
 		assertFalse(g.getPath(f).isPassable());
+		Path.createPath(f, g); //shouldn't do anything
+		assertFalse(f.getPaths().size()==2);
+	}
+	
+	@Test
+	public void AStarAlgorithmPathingTest()
+	{
+		ArrayList<Province> provinces = new ArrayList<Province>();
+		for(int i = 0;i<10;i++)
+		{
+			for(int j=0;j<10;j++)
+			{
+				provinces.add(i+j,new Farmlands(new Position(i*100+50,j*100+50)));
+			}
+		}
+		//go from 1 to 9 so you can add paths to all neighbours without going out of bounds
+		for(int i = 1;i<9;i++)
+		{
+			for(int j = 10; j<90;j+=10)
+			{
+				Path.createPath(provinces.get(i+j),provinces.get((i+j)+1));
+				Path.createPath(provinces.get(i+j),provinces.get((i+j)-1));
+				Path.createPath(provinces.get(i+j),provinces.get((i+j)+10));
+				Path.createPath(provinces.get(i+j),provinces.get((i+j)-10));
+				Path.createPath(provinces.get(i+j),provinces.get((i+j)+11));
+				Path.createPath(provinces.get(i+j),provinces.get((i+j)-11));
+				Path.createPath(provinces.get(i+j),provinces.get((i+j)+9));
+				Path.createPath(provinces.get(i+j),provinces.get((i+j)-9));
+			}
+		}
+		ArrayList<Drawable> d= new ArrayList<Drawable>();
+		d.addAll(provinces);
+		d.addAll(Path.getWorldPaths());
+		new DisplayFrame(d);
+		while(true);
 	}
 
 }
