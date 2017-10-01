@@ -24,9 +24,10 @@ public final class Path implements Drawable{
 	{
 		if(tileFrom != tileTo) //You can't path to the same province
 		{
-			if(tileFrom.getPath(tileTo) == null) //If the path does not already exist
+			if(tileFrom.hasPath(tileTo)) //If the path does not already exist
 			{
 				Path p = new Path(tileFrom,tileTo);
+				//Both tiles must have the path added to
 				tileFrom.addPath(p);
 				tileTo.addPath(p);
 				worldPaths.add(p);

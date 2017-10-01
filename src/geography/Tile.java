@@ -21,7 +21,8 @@ public abstract class Tile
 	public void addPath(Path p)
 	{
 		//Only add the path if we don't already have it
-		if(!hasPath(p))
+		//The path must also include this tile
+		if(!hasPath(p) && p.includesTile(this))
 		{
 			paths.add(p);
 		}
@@ -40,6 +41,14 @@ public abstract class Tile
 	public boolean hasPath(Path p)
 	{
 		return paths.contains(p);
+	}
+	/**
+	 * @param t the tile to be looked for in this Tile's path list
+	 * @return true if t can be pathed to from this province
+	 */
+	public boolean hasPath(Tile t)
+	{
+		return (getPath(t)==null);
 	}
 	/**
 	 * @param to the tile to which this function looks for a path to

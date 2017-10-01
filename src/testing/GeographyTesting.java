@@ -64,34 +64,6 @@ public class GeographyTesting
 	@Test
 	public void AStarAlgorithmPathingTest()
 	{
-		ArrayList<Province> provinces = new ArrayList<Province>();
-		for(int i = 0;i<10;i++)
-		{
-			for(int j=0;j<10;j++)
-			{
-				provinces.add(i+j,new Farmlands(new Position(i*100+50,j*100+50)));
-			}
-		}
-		//go from 1 to 9 so you can add paths to all neighbours without going out of bounds
-		for(int i = 1;i<9;i++)
-		{
-			for(int j = 10; j<90;j+=10)
-			{
-				Path.createPath(provinces.get(i+j),provinces.get((i+j)+1));
-				Path.createPath(provinces.get(i+j),provinces.get((i+j)-1));
-				Path.createPath(provinces.get(i+j),provinces.get((i+j)+10));
-				Path.createPath(provinces.get(i+j),provinces.get((i+j)-10));
-				Path.createPath(provinces.get(i+j),provinces.get((i+j)+11));
-				Path.createPath(provinces.get(i+j),provinces.get((i+j)-11));
-				Path.createPath(provinces.get(i+j),provinces.get((i+j)+9));
-				Path.createPath(provinces.get(i+j),provinces.get((i+j)-9));
-			}
-		}
-		ArrayList<Drawable> d= new ArrayList<Drawable>();
-		d.addAll(provinces);
-		d.addAll(Path.getWorldPaths());
-		new DisplayFrame(d);
-		while(true);
 	}
 
 }
